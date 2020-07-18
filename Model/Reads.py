@@ -13,10 +13,10 @@ class Read:
         """
         freq = {}
         n = len(text)
-        for i in range(n-k+1):
-            pattern = text[i: i+k]
+        for i in range(n - k + 1):
+            pattern = text[i: i + k]
             freq[pattern] = 0
-            for j in range(n-k+1):
+            for j in range(n - k + 1):
                 if freq[pattern] == pattern:
                     freq[pattern] += 1
         return freq
@@ -52,3 +52,12 @@ class Read:
 
         """
         return pattern[::-1]
+
+    def complement(self, pattern):
+        complement = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+        return ''.join(complement[base] for base in pattern)
+
+    def reverse_complement(self, pattern):
+        self.reverse(pattern)
+        self.complement(pattern)
+        return pattern
