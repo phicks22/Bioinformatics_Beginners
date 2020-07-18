@@ -54,15 +54,47 @@ class Read:
         return pattern[::-1]
 
     def complement(self, pattern):
+        """Replaces the bases in the given pattern with the complementary base pairs.
+
+
+        Arguments:
+            pattern
+
+        Returns:
+            complementary strand
+
+
+        """
         complement = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
         return ''.join(complement[base] for base in pattern)
 
     def reverse_complement(self, pattern):
+        """Utilizes the complement and reverse functions to return the reverse complement of the pattern.
+
+
+        Arguments:
+            pattern
+
+        Returns:
+            reverse complement
+
+
+        """
         self.reverse(pattern)
         self.complement(pattern)
         return pattern
 
     def pattern_matching(self, pattern, genome):
+        """Identifies the indices in which a given pattern can be found within a genome.
+
+
+        Arguments:
+            pattern, genome
+
+        Returns:
+            positions list
+
+        """
         positions = []
         for i in range(len(genome) - len(pattern) + 1):
             if genome[i: i + len(pattern)] == pattern:
