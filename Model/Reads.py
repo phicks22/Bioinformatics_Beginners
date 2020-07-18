@@ -40,3 +40,15 @@ class Read:
             if freq[key] == m:
                 words.append(key)
         return words
+
+    def reverse(self, pattern):
+        """Reverses the pattern of nucleotides.
+
+        Arguments:
+            pattern
+
+        Returns:
+            reversed pattern
+
+        """
+        return pattern[::-1]
