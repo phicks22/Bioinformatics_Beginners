@@ -1,7 +1,7 @@
 class Read:
 
     def frequency_map(self, text, k):
-        """Identifies the combinations of nucleotides present in a sequence from a given k-mer value
+        """Identifies the combinations of adjacent nucleotides present in a sequence from a given k-mer value
         and adds them to a dictionary.
 
         Arguments:
@@ -22,6 +22,17 @@ class Read:
         return freq
 
     def frequency_words(self, text, k):
+        """Calculates the most common combinations of adjacent nucleotides and adds them to a list.
+
+
+        Arguments:
+            text, k
+
+        Returns:
+            words
+
+
+        """
         words = []
         freq = self.frequency_map(text, k)
         m = max(freq.values())
