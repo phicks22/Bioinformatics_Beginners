@@ -9,3 +9,11 @@ def frequency_map(text, k):
                 freq[pattern] += 1
     return freq
 
+def frequency_words(text, k):
+    words = []
+    freq = frequency_map(text, k)
+    m = max(freq.values())
+    for key in freq:
+        if freq[key] == m:
+            words.append(key)
+    return words
