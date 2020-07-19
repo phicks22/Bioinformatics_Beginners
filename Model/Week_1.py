@@ -5,8 +5,10 @@ class Reader:
 
     def pattern_count(self, pattern, genome):
         count = 0
-        for i in range(len(genome) - len(pattern) + 1):
-            if genome[i: i + len(pattern)] == pattern:
+        n = len(genome)
+        k = len(pattern)
+        for i in range(n-k+1):
+            if genome[i: i+k] == pattern:
                 count += 1
         return count
 
@@ -115,10 +117,15 @@ class Reader:
         dict = {}
         n = len(genome)
         extended_genome = genome + genome[:n//2]
-        for i in range(n):
-            dict[i] = self.pattern_count(symbol, extended_genome[i:i+(n//2)])
+        dict[0] = self.pattern_count(symbol, genome[0:n//2])
+        for i in range(1, n):
+            dict[i] = dict[i-1]
+            if extended_genome[i-1] == symbol:
+                dict[i] = dict[i] - 1
+            if extended_genome[i+(n//2)-1] == symbol:
+                dict[i] = dict[i] + 1
         return dict
 
 
 ex_1 = Reader('TGT')
-print(ex_1.pattern_count('TGT', 'TGTGCAGTACGTGTGCA'))
+print(ex_1.symbol_dict('TGTGCAGTACGTGTGCA', 'T'))
