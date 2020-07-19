@@ -1,4 +1,14 @@
-class Read:
+class Reader:
+
+    def __init__(self, pattern):
+        self.pattern = pattern
+
+    def pattern_count(self, pattern, genome):
+        count = 0
+        for i in range(len(genome) - len(pattern) + 1):
+            if genome[i: i + len(pattern)] == pattern:
+                count += 1
+        return count
 
     def frequency_map(self, text, k):
         """Identifies the combinations of adjacent nucleotides present in a sequence from a given k-mer value
@@ -17,7 +27,7 @@ class Read:
             pattern = text[i: i + k]
             freq[pattern] = 0
             for j in range(n - k + 1):
-                if freq[pattern] == pattern:
+                if text[j: j+k] == pattern:
                     freq[pattern] += 1
         return freq
 
@@ -100,3 +110,15 @@ class Read:
             if genome[i: i + len(pattern)] == pattern:
                 positions.append(i)
         return positions
+
+    def symbol_dict(self, genome, symbol):
+        dict = {}
+        n = len(genome)
+        extended_genome = genome + genome[:n//2]
+        for i in range(n):
+            dict[i] = self.pattern_count(symbol, extended_genome[i:i+(n//2)])
+        return dict
+
+
+ex_1 = Reader('TGT')
+print(ex_1.pattern_count('TGT', 'TGTGCAGTACGTGTGCA'))
